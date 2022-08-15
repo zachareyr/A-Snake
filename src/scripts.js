@@ -415,12 +415,12 @@ class AStar {
             closed.push(currentNode);
 
             if (currentNode.pos.x === this.target.x && currentNode.pos.y === this.target.y) {
-                if(this.dfs(currentNode, this.board.snake.length, this.getBoardAt(currentNode)).cost >= this.board.snake.length) {
+                // if(this.dfs(currentNode, this.board.snake.length, this.getBoardAt(currentNode)).cost >= this.board.snake.length) {
                     console.log("path found");
                     return currentNode;
-                } else {
-                    console.log("path rejected");
-                }
+                // } else {
+                //     console.log("path rejected");
+                // }
             }
             
 
@@ -454,9 +454,10 @@ class AStar {
                 open.push(child);
             }
         }
-        console.log("No path found. Stalling.");    
+        console.log("No valid path found.");    
+        console.log("Game Over.")
         // return this.dfs(currentNode, this.board.snake.length, this.boardTo2DArray(this.board.board));
-        return new AStarNode(applyDirection(this.board.snake[0].pos.copy(), directions["UP"]),this.target);
+        setTimeout(this.board.reset(), 1000);
 
     };
 
@@ -540,6 +541,6 @@ class AStar {
 
 
 let allContainer = document.getElementById("all-container");
-board = new Board(20, 20, 100, document.getElementById("board-container"));
+let board = new Board(20, 20, 100, document.getElementById("board-container"));
 document.addEventListener("keydown", handleKeyPress);
 
